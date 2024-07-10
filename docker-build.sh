@@ -1,25 +1,21 @@
 #!/bin/sh
 
-set -o allexport
-if [ -f .env ]; then
-    source .env
-fi
-set +o allexport
+DOCKER_PASSWORD=$1
+DOCKER_USERNAME=$2
+DOCKER_ACCOUNT=$3
 
 echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
 
-docker build --tag=microservice-kubernetes-demo-apache apache
-docker tag microservice-kubernetes-demo-apache $DOCKER_ACCOUNT/microservice-kubernetes-demo-apache:otel
-docker push $DOCKER_ACCOUNT/microservice-kubernetes-demo-apache:otel
 
-docker build --tag=microservice-kubernetes-demo-catalog microservice-kubernetes-demo-catalog
-docker tag microservice-kubernetes-demo-catalog $DOCKER_ACCOUNT/microservice-kubernetes-demo-catalog:otel
-docker push $DOCKER_ACCOUNT/microservice-kubernetes-demo-catalog:otel
+# Construir y empujar las imágenes Docker con las etiquetas correctas
+docker build --tag "${DOCKER_ACCOUNT}/microservice-kubernetes-demo-apache:otel" apache
+docker push "${DOCKER_ACCOUNT}/microservice-kubernetes-demo-apache:otel"
 
-docker build --tag=microservice-kubernetes-demo-customer microservice-kubernetes-demo-customer
-docker tag microservice-kubernetes-demo-customer $DOCKER_ACCOUNT/microservice-kubernetes-demo-customer:otel
-docker push $DOCKER_ACCOUNT/microservice-kubernetes-demo-customer:otel
+docker build --tag "${DOCKER_ACCOUNT}/microservice-kubernetes-demo-catalog:otel" microservice-kubernetes-demo-catalog
+docker push "${DOCKER_ACCOUNT}/microservice-kubernetes-demo-catalog:otel"
 
-docker build --tag=microservice-kubernetes-demo-order microservice-kubernetes-demo-order
-docker tag microservice-kubernetes-demo-order $DOCKER_ACCOUNT/microservice-kubernetes-demo-order:otel
-docker push $DOCKER_ACCOUNT/microservice-kubernetes-demo-order:otel
+docker build --tag "${DOCKER_ACCOUNT}/microservice-kubernetes-demo-customer:otel" microservice-kubernetes-demo-customer
+docker push "${DOCKER_ACCOUNT}/microservice-kubernetes-demo-customer:otel"
+
+docker build --tag "${DOCKER_ACCOUNT}/microservice-kubernetes-demo-order:otel" microservice-kubernetes-demo-order
+docker push "${DOCKER_ACCOUNT}/microservice-kubernetes-demo-order:otel"
