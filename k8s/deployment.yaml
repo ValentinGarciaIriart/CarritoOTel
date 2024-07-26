@@ -19,7 +19,7 @@ spec:
         run: apache
     spec:
       containers:
-      - image: docker.io/valentingarciairiart/microservice-kubernetes-demo-apache:otel3
+      - image: docker.io/valentingarciairiart/microservice-kubernetes-demo-apache:otel4
         name: apache
         ports:
         - containerPort: 80
@@ -53,7 +53,7 @@ spec:
         run: catalog
     spec:
       containers:
-      - image: docker.io/valentingarciairiart/microservice-kubernetes-demo-catalog:otel3
+      - image: docker.io/valentingarciairiart/microservice-kubernetes-demo-catalog:otel4
         name: catalog
         ports:
         - containerPort: 8080
@@ -87,7 +87,7 @@ spec:
         run: customer
     spec:
       containers:
-      - image: docker.io/valentingarciairiart/microservice-kubernetes-demo-customer:otel3
+      - image: docker.io/valentingarciairiart/microservice-kubernetes-demo-customer:otel4
         name: customer
         ports:
         - containerPort: 8080
@@ -121,7 +121,7 @@ spec:
         run: order
     spec:
       containers:
-      - image: docker.io/valentingarciairiart/microservice-kubernetes-demo-order:otel3
+      - image: docker.io/valentingarciairiart/microservice-kubernetes-demo-order:otel4
         name: order
         ports:
         - containerPort: 8080
